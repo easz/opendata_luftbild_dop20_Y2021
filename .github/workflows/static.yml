@@ -32,23 +32,49 @@ jobs:
       - name: Show free space
         run: |
           echo "Free space:"
-          df -h
-      - name: Checkout
-        uses: actions/checkout@v3
+          df -h    
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
         with:
-          path: '$GITHUB_WORKSPACE/checkout'
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'    
+      - name: Checkout
+        uses: actions/checkout@v2    
       - name: Show free space
         run: |
           echo "Free space:"
-          df -h        
+          df -h
+      - name: Show runner.temp
+        run: |
+          echo "runner.temp:"
+          readlink -f ${{ runner.temp }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Show free space
+        run: |
+          echo "Free space:"
+          df -h  
+      - name: Show workspace
+        run: |
+          echo "Workspace:"
+          readlink -f ${GITHUB_WORKSPACE}
+      - name: Show workspace
+        run: |
+          echo "Workspace:"
+          ls ${GITHUB_WORKSPACE}          
       - name: Setup Pages
         uses: actions/configure-pages@v3
+      - name: Show Temp
+        run: |
+          echo "Temp:"
+          ls ${{ runner.temp }}         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
-        env:
-          RUNNER_TEMP: '$GITHUB_WORKSPACE'
         with:
-          path: '$GITHUB_WORKSPACE/checkout'
+          path: '.'    
       - name: Show free space
         run: |
           echo "Free space:"
