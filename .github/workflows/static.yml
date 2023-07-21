@@ -51,6 +51,10 @@ jobs:
         run: |
           echo "runner.temp:"
           readlink -f ${{ runner.temp }}
+      - name: Show runner.temp
+        run: |
+          echo "runner.temp:"
+          ls -a ${{ runner.temp }}          
       - name: Checkout
         uses: actions/checkout@v3
       - name: Show free space
@@ -64,21 +68,25 @@ jobs:
       - name: Show workspace
         run: |
           echo "Workspace:"
-          ls ${GITHUB_WORKSPACE}          
+          ls -a ${GITHUB_WORKSPACE}          
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Show Temp
+      - name: Show runner.temp
         run: |
-          echo "Temp:"
-          ls ${{ runner.temp }}         
+          echo "runner.temp:"
+          readlink -f ${{ runner.temp }}
+      - name: Show runner.temp
+        run: |
+          echo "runner.temp:"
+          ls -a ${{ runner.temp }}
+      - name: Show free space
+        run: |
+          echo "Free space:"
+          df -h                    
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: '.'    
-      - name: Show free space
-        run: |
-          echo "Free space:"
-          df -h          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
