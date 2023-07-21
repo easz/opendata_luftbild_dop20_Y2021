@@ -29,14 +29,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Show free space
-        run: |
-          echo "Free space:"
-          df -h    
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 20480
+          root-reserve-mb: 25000
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
@@ -44,46 +40,26 @@ jobs:
           remove-docker-images: 'true'    
       - name: Checkout
         uses: actions/checkout@v2    
-      - name: Show free space
-        run: |
-          echo "Free space:"
-          df -h
-      - name: Show runner.temp
+      - name: runner.temp
         run: |
           echo "runner.temp:"
           readlink -f ${{ runner.temp }}
-      - name: Show runner.temp
+      - name: Workspace
         run: |
-          echo "runner.temp:"
-          ls -a ${{ runner.temp }}          
+          echo "Workspace:"
+          readlink -f ${GITHUB_WORKSPACE}
+      - name: Workspace
+        run: |
+          echo "Workspace:"
+          ls -a ${GITHUB_WORKSPACE}          
       - name: Checkout
         uses: actions/checkout@v3
       - name: Show free space
         run: |
           echo "Free space:"
           df -h  
-      - name: Show workspace
-        run: |
-          echo "Workspace:"
-          readlink -f ${GITHUB_WORKSPACE}
-      - name: Show workspace
-        run: |
-          echo "Workspace:"
-          ls -a ${GITHUB_WORKSPACE}          
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Show runner.temp
-        run: |
-          echo "runner.temp:"
-          readlink -f ${{ runner.temp }}
-      - name: Show runner.temp
-        run: |
-          echo "runner.temp:"
-          ls -a ${{ runner.temp }}
-      - name: Show free space
-        run: |
-          echo "Free space:"
-          df -h                    
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
@@ -91,3 +67,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          timeout: 3600000
