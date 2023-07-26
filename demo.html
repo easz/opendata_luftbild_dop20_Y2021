@@ -44,10 +44,14 @@
         getTileUrl: function (coords) {
           var p = '{z}/{x}/{y}.png';
           if (coords.z == 19) {
-            if (coords.x <= 278980)
+            if (coords.x <= 278887)
               p = '../opendata_luftbild_dop20_Y2021_z19_0/{z}/{x}/{y}.png';
+            else if (coords.x <= 278966)
+              p = '../opendata_luftbild_dop20_Y2021_z19_1/{z}/{x}/{y}.png';
+            else if (coords.x <= 279061)
+              p = '../opendata_luftbild_dop20_Y2021_z19_2/{z}/{x}/{y}.png';
             else
-              p = '../opendata_luftbild_dop20_Y2021_z19_1/{z}/{x}/{y}.png';            
+              p = '../opendata_luftbild_dop20_Y2021_z19_3/{z}/{x}/{y}.png';
           }
           return p.replace('{x}', coords.x).replace('{y}', coords.y).replace('{z}', coords.z);
         }
