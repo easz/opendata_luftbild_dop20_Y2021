@@ -4,7 +4,7 @@ Cached map tiles from publicly available aerial images (open data) provided by [
 
 Summary: Aerial images of Munich with 20cm resolution (Summer 2021)
 
-Source: [https://opendata.muenchen.de/dataset/luftbild_opendata_20cm](https://opendata.muenchen.de/dataset/luftbild)
+Source: [https://opendata.muenchen.de/dataset/luftbild](https://opendata.muenchen.de/dataset/luftbild)
 
 Cache format: XYZ web map tiles
 
